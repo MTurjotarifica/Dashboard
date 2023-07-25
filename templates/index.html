@@ -8,24 +8,12 @@
     <!-- Add a div to render the chart -->
     <div id="chart"></div>
 
-    <!-- Add a form for user input -->
-    <form id="query-form">
-        <label for="query">Enter text:</label>
-        <input type="text" id="query" name="query">
-        <input type="submit" value="Generate Graph">
-    </form>
-
     <script>
-        // JavaScript code for handling form submission
-        document.getElementById("query-form").onsubmit = function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Get the user-entered text from the input box
-            var queryText = document.getElementById("query").value;
-
-            // Redirect to the Flask route with the entered text as a query parameter
-            window.location.href = "/generate_graph?text=" + encodeURIComponent(queryText);
-        };
+        // Pass the fig data from Flask to JavaScript
+        var figData = {{ fig.to_json()|safe }};
+        
+        // Render the chart using Plotly.js
+        Plotly.newPlot('chart', figData.data, figData.layout);
     </script>
 </body>
 </html>
