@@ -14,22 +14,20 @@ import plotly.graph_objects as go
 
 app = Flask(__name__)
 
-# Your code for the visualization function and other utilities goes here
-engine = create_engine(
-    'mysql+pymysql://sandbox_read_only:ThX*AXrE%1W4X27@mysqldatabase.cmi5f1vp8ktf.us-east-1.rds.amazonaws.com:3306/sandbox')
+# # Your code for the visualization function and other utilities goes here
+# engine = create_engine(
+#     'mysql+pymysql://sandbox_read_only:ThX*AXrE%1W4X27@mysqldatabase.cmi5f1vp8ktf.us-east-1.rds.amazonaws.com:3306/sandbox')
 
-# creating a connection object
-connection = engine.connect()
+# # creating a connection object
+# connection = engine.connect()
 
+## SQL query
+# stmt = "SELECT * FROM digital_demand WHERE (gt_category = 13) AND (country = 'DE') and (date >= '2022-11-01')"
 
-# SQL query
-stmt = "SELECT * FROM digital_demand WHERE (gt_category = 13) AND (country = 'DE') and (date >= '2022-11-01')"
-
-# Execute the query and store the result in a DataFrame
-df_raw = pd.read_sql(sqlalctext(stmt), connection)
-
-
-connection.close()
+# # Execute the query and store the result in a DataFrame
+# df_raw = pd.read_sql(sqlalctext(stmt), connection)
+# connection.close()
+df_raw = pd.read_excel('df_raw_data.xlsx')
 
 df_raw.date = pd.to_datetime(df_raw['date'])
 
